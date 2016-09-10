@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>-->
+
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/tchSendCourse.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/zepto.mdatetimer.css">
+    <script src='js/zepto.js' charset='utf-8'></script>
+    <script src='js/zepto.mdatetimer.js' charset='utf-8'></script>
+    <title>发布课设页面</title>
+</head>
+<body>
+    <content>
+        <div class="nav">d</div>
+        <div class="row">
+            <div class="col-xs-5"><img src="image/keshe.png" class="courseIcon" alt="" >&nbsp;课设名</div>
+            <div class="col-xs-7"><input type="text" id="CourseName"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5"><img src="image/wrench44.png" class="courseIcon" alt="">技术方向</div>
+            <div class="col-xs-7">
+                <div class="dropdown ">
+                    <button class="btn btn-default dropdown-toggle  col-xs-12 " type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        Dropdown
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu col-xs-12" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4"><img src="image/task.png" class="courseIcon" >&nbsp;任务名</div>
+            <div class="col-xs-4 pull-right"><img src="image/calendar182.png" class="courseIcon">截止日期</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6"><input type="text" placeholder="可选"></div>
+            <div class="col-xs-6 "><input type="text" id="courseTime"></div>
+
+        </div>
+    <!--添加注释-->
+        <div id="sendcosNote">
+            <input type="text" id="sendcostxt">
+            <div id="noteResource">+</div>
+        </div>
+        <div id="sendInput" >
+            发布 <img src="image/fabu.png" alt="">
+        </div>
+        <input id="my-input" type="text"/>
+
+    </content>
+    <script>
+        $(function(){
+            $('#courseTime').mdatetimer({
+                mode : 1, //时间选择器模式：1：年月日，2：年月日时分（24小时），3：年月日时分（12小时），4：年月日时分秒。默认：1
+                format : 2, //时间格式化方式：1：2015年06月10日 17时30分46秒，2：2015-05-10  17:30:46。默认：2
+                years : [2000, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,2018,2019], //年份数组
+                nowbtn : true, //是否显示现在按钮
+                onOk : function(){
+                    //alert('OK');
+                } //点击确定时添加额外的执行函数 默认null
+
+            });
+        });
+
+    </script>
+</body>
+</html>

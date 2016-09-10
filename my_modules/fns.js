@@ -181,37 +181,6 @@ function httpReqPrms(options, bodydata) {
     return prms;
 };
 
-/*向指定目标发送一封邮件
-默认以_xcfg.serMail.addr为发送邮箱
-*/
-var mailTransPort = $mailer.createTransport({
-    host: _xcfg.serMail.host,
-    port: _xcfg.serMail.port,
-    auth: {
-        user: _xcfg.serMail.addr,
-        pass: _xcfg.serMail.pw,
-    },
-});
-
-/*可以使用其它传输器，默认为serMail
- */
-_fns.sendMail = sendMail;
-
-function sendMail(tarmail, tit, cont) {
-    var prms = new Promise(function(resolvefn, rejectfn, transport) {
-        if (!transport) transport = mailTransPort;
-        transport.sendMail({
-            from: 'jscodepie servicegroup<' + _xcfg.serMail.addr + '>',
-            to: tarmail,
-            subject: tit,
-            html: cont
-        }, function(err, res) {
-            (err) ? rejectfn(err) : resolvefn(res);
-        });
-    });
-    return prms;
-};
-
 
 /**
  * 函数，通过request请求获取uid

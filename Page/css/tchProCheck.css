@@ -1,0 +1,40 @@
+.container{
+ width: 100%;
+    height: 620px;
+     background: #53B4E0;
+    text-align: center;
+    color:white;
+    font-size:30px;
+    font-weight: bolder;
+}
+.nav{
+    height: 50px;
+ }
+.ProChk{
+    position:relative;
+    height: 140px;
+    border-bottom: 3px solid #A3CEE2;
+    padding:20px;
+}
+.ProChk img{
+    width: 20%;
+    float: left;
+}
+.ProChk .ProInfo{
+    float:left;
+    height: 100px;
+}
+.callInput{
+    width:100px;
+    height: 50px;
+    border-radius: 50px;
+    background: #1AD3F1;
+    color:white;
+    font-size: 30px;
+    float:right;
+    top:25%;
+    left:75%;
+    position:absolute;
+    text-align:center;
+    line-height:50px;
+}

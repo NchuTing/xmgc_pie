@@ -11,6 +11,10 @@ _rotr = new $router();
 _rotr.get('api', '/api/:apiname', apihandler);
 _rotr.post('api', '/api/:apiname', apihandler);
 
+
+
+
+
 /*所有api处理函数都收集到这里
 必须是返回promise
 各个api处理函数用promise衔接,return传递ctx
@@ -55,6 +59,9 @@ function * apihandler(next) {
     yield next;
 };
 
+
+
+
 /*测试接口,返回请求的数据
  */
 _rotr.apis.test = function() {
@@ -71,6 +78,28 @@ _rotr.apis.test = function() {
     });
     return co;
 };
+/*测试接口,返回请求的数据
+ */
+_rotr.apis.test2 = function() {
+    var ctx = this;
+    var co = $co(function * () {
+        //拿到数据 验证数据
+        var pw= ctx.query.pw || ctx.request.body.pw;
+        //if (!pw || /^\d{3,6}$/.test(pw)) throw Error('密码格式错误，滚.');
+
+        //处理数据
+        var res={
+            newpw:pw+'new'
+        };
+        //返回结果
+        ctx.body =res;
+        return ctx;
+    });
+    return co;
+};
+
+
+
 
 //导出模块
 module.exports = _rotr;

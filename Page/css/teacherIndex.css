@@ -1,0 +1,99 @@
+.content,div{
+    text-align: center;
+    width: 100%;
+}
+a{
+    color: white;
+}
+.content{
+    height: 620px;
+   background:#53B4E0;
+}
+.nav{
+    height: 50px;
+}
+/*教师信息*/
+#tchInfo{
+    height: 100px;
+    text-align: center;
+}
+#tchInfo img{
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+}
+#tchInfo .col-xs-12{
+    height: 20px;
+    margin: 5px;
+    line-height: 40px;
+}
+
+#tchIndexInput{
+    font-size:14px;
+    color: white;
+    font-weight: bolder;
+    height: 216px;
+    border: 1px solid;
+}
+.row{
+    margin: 0px;
+    padding:0px;
+}
+#tchIndexInput .col-xs-6{
+    border: 2px solid white;
+    font-family: "Arial";
+    height: 108px;
+    padding-top:10px ;
+
+}
+#tchpubDesign{
+    background:#00B6DE ;
+}
+#tchpubProject{
+    background: #56DEA7;
+}
+#tchProChked{
+background:#F8CD36;
+}
+#tchProChk{
+    background:#F26175;
+}
+.tchIndexMessage{
+    position: absolute;
+    top:50px;
+    left:30px;
+}
+.Inputicon{
+    position: absolute;
+    top:10px;
+    left:100px;
+    height: 50px;
+    width: 50px;
+}
+#tchIndexPronav{
+    height: 50px;
+    background:#87CBE9 ;
+    text-align: left;
+    color: white;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+#tchIndexPronav div{
+    width: 80px;
+    height: 40px;
+    float: right;
+    margin-top: 5px;
+    background-image:url('../image/gengduo1.png');
+    text-indent: -20px;
+}
+/*对教师界面项目轮播设置*/
+#tchIndexImg .item>div{
+    border: 1px solid;
+    width: 170px;
+    position: absolute;
+    left: 192px;
+    top:20px;
+    padding: 15px;
+}
+
