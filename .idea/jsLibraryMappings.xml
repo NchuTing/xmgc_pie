@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{xmgc_piedemo_min node_modules}" />
+    <file url="file://D:/高博/Course/xmgc_piedemo" libraries="{xmgc_piedemo_min node_modules}" />
   </component>
 </project>

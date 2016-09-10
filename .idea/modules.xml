@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/xmgc_piedemo_min.iml" filepath="$PROJECT_DIR$/.idea/xmgc_piedemo_min.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../xmgc_piedemo/.idea/xmgc_piedemo_min.iml" filepath="$PROJECT_DIR$/../xmgc_piedemo/.idea/xmgc_piedemo_min.iml" />
     </modules>
   </component>
 </project>
