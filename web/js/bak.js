@@ -364,7 +364,6 @@ if (!_pie) var _pie = {};
 
 
 
-
     /*最基本的上传按钮
     progress(evt),//添加evt.percent
     successfn(res),//增加res.url
@@ -386,7 +385,7 @@ if (!_pie) var _pie = {};
      * @param   {boolean} multi     同时上传多个文件
      * @returns {int} uploadId整数，指向一个数组包含所有文件的xhr，数组存放在_cfg.xhrs[uploadId]
      */
-    _fns.uploadFile = function (path, btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain, multi) {
+    _fns.uploadFile = function(path, btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain, multi) {
         if (!btnjo) {
             __errhdlr(new Error('_fns.uploadFile:button undefined.'));
             return;
@@ -405,30 +404,26 @@ if (!_pie) var _pie = {};
         btnjo.after(filejo);
 
         //给file input添加监听
-        filejo.bind('change', function () {
+        filejo.bind('change', function() {
             var fileobjs = filejo.get(0).files;
             if (!domain) domain = _cfg.qn.BucketDomain;
 
             for (var i = 0; i < fileobjs.length; i++) {
                 var f = fileobjs[i];
-                if (abortfn) f.abortfn = abortfn;
 
                 //执行上传之前的动作,预先放置一个空的xhr，带有file信息
                 var xhrid = _fns.uuid();
                 var xhr = {};
                 xhr.file = f;
-                xhr.id = xhr.file.id = f.id = xhrid;
-                xhr.id = xhr.file.uploadId = f.uploadId = uploadId;
-
-
+                xhr.id = xhr.file.id = xhrid;
                 _cfg.xhrs[uploadId][xhrid] = xhr;
                 if (beforefn) beforefn(f, xhr);
 
                 var fname = f.name;
 
                 //开始上传
-                xhr = _fns.uploadFileQn(path + '/' + fname, xhr.file,
-                    function (evt) {
+                xhr = _fns.uploadFileQn(path + '/' + fname, f,
+                    function(evt) {
                         //添加evt.percent,为了避免abort之后progress会多运行一次，所以使用f.abort做判断
                         if (progressfn && !f.abort) {
                             if (evt.lengthComputable) {
@@ -438,21 +433,23 @@ if (!_pie) var _pie = {};
                             progressfn(f, evt);
                         };
                     },
-                    function (res) {
+                    function(res) {
                         //把七牛的返回结果转为标准格式
                         res['success'] = true;
                         f.url = res.url = res['file_path'] = domain + res.key;
                         res['msg'] = 'upload ok.';
                         if (successfn) successfn(f, res);
                     },
-                    function (f, err) {
+                    function(f, err) {
                         if (errorfn) errorfn(f, err);
                     },
-                    function (xhr, status) {
+                    function(xhr, status) {
                         filejo.remove();
                         if (completefn) completefn(f, xhr, status);
                     }, domain);
 
+                if (xhr && abortfn) xhr['abortfn'] = abortfn;
+                if (xhr) xhr.id = xhrid;
                 if (xhr) _cfg.xhrs[uploadId][xhrid] = xhr;
             }
         });
@@ -468,7 +465,7 @@ if (!_pie) var _pie = {};
      * 上传多个文件，与uploadFile单个文件相同
      * 指定目录版本
      */
-    _fns.uploadFiles = function (btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain) {
+    _fns.uploadFiles = function(btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain) {
         return _fns.uploadFile(btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain, true);
     };
 
@@ -486,7 +483,7 @@ if (!_pie) var _pie = {};
      * @param   {boolean} multi     同时上传多个文件
      * @returns {int} uploadId整数，指向一个数组包含所有文件的xhr，数组存放在_cfg.xhrs[uploadId]
      */
-    _fns.uploadFile2 = function (btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain, multi) {
+    _fns.uploadFile2 = function(btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain, multi) {
         if (!btnjo) {
             __errhdlr(new Error('_fns.uploadFile:button undefined.'));
             return;
@@ -506,29 +503,26 @@ if (!_pie) var _pie = {};
 
 
         //给file input添加监听
-        filejo.bind('change', function () {
+        filejo.bind('change', function() {
             var fileobjs = filejo.get(0).files;
             if (!domain) domain = _cfg.qn.BucketDomain;
 
             //获取随机文件名token
-            $.get(_cfg.qn.getUploadTokenApi2, function (res) {
+            $.get(_cfg.qn.getUploadTokenApi2, function(res) {
                 for (var i = 0; i < fileobjs.length; i++) {
                     var f = fileobjs[i];
-                    if (abortfn) f.abortfn = abortfn;
 
                     //执行上传之前的动作,预先放置一个空的xhr，带有file信息
                     var xhrid = _fns.uuid();
                     var xhr = {};
                     xhr.file = f;
-                    xhr.id = xhr.file.id = f.id = xhrid;
-                    xhr.uploadId = xhr.file.uploadId = f.uploadId = uploadId;
-
+                    xhr.id = xhr.file.id = xhrid;
                     _cfg.xhrs[uploadId][xhrid] = xhr;
                     if (beforefn) beforefn(f, xhr);
 
                     //开始上传
                     xhr = _fns.uploadFileQn2(res.data.uptoken, f,
-                        function (evt) {
+                        function(evt) {
                             //添加evt.percent,为了避免abort之后progress会多运行一次，所以使用f.abort做判断
                             if (progressfn && !f.abort) {
                                 if (evt.lengthComputable) {
@@ -538,30 +532,23 @@ if (!_pie) var _pie = {};
                                 progressfn(f, evt);
                             };
                         },
-                        function (res) {
+                        function(res) {
                             //把七牛的返回结果转为标准格式
                             res['success'] = true;
                             f.url = res.url = res['file_path'] = domain + res.key;
                             res['msg'] = 'upload ok.';
                             if (successfn) successfn(f, res);
                         },
-                        function (f, err) {
+                        function(f, err) {
                             if (errorfn) errorfn(f, err);
                         },
-                        function (xhr, status) {
+                        function(xhr, status) {
                             filejo.remove();
                             if (completefn) completefn(f, xhr, status);
                         }, domain);
 
                     if (xhr && abortfn) xhr['abortfn'] = abortfn;
-                    if (xhr) {
-                        xhr.id = xhrid;
-                        xhr.uploadId = uploadId;
-                        if (xhr.file) {
-                            xhr.file.id = xhrid;
-                            xhr.file.uploadId = uploadId;
-                        };
-                    };
+                    xhr.id = xhrid;
                     if (xhr) _cfg.xhrs[uploadId][xhrid] = xhr;
                 }
             });
@@ -578,8 +565,26 @@ if (!_pie) var _pie = {};
      * 上传多个文件，与uploadFile单个文件相同
      * 随机文件名版本
      */
-    _fns.uploadFiles2 = function (btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain) {
+    _fns.uploadFiles2 = function(btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain) {
         return _fns.uploadFile2(btnjo, beforefn, progressfn, successfn, abortfn, errorfn, completefn, domain, true);
+    };
+
+
+    /**
+     * 取消上传，同时适用指定文件名版本和随机文件名版本
+     * @param {int} xhrid 最终xhr将存放在_cfg.xhrs[xhrid]
+     */
+    _fns.abortUpload = function(xhrid) {
+        for (var upid in _cfg.xhrs) {
+            var ups = _cfg.xhrs[upid];
+            for (var xid in ups) {
+                var xhr = ups[xid];
+                xhr.file.abort = true;
+                xhr.abort();
+                delete ups[xid];
+                if (xhr.abortfn) xhr.abortfn(xhr.file);
+            }
+        };
     };
 
 
